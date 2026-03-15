@@ -37,22 +37,22 @@ def home(request: Request):
 @app.post("/chat")
 async def chat(request: Request, message: str = Form(...)):
 
-    # add user message
+   
     conversation_history.append({
         "role": "user",
         "content": message
     })
 
-    # call LLM
+  
     response = chat_with_llm(conversation_history)
 
-    # save response
+  
     conversation_history.append({
         "role": "assistant",
         "content": response
     })
 
-    # extract diagram
+
     diagram = extract_mermaid(response)
 
     return templates.TemplateResponse(
@@ -67,7 +67,7 @@ async def chat(request: Request, message: str = Form(...)):
 def test():
     return {"status": "server running"}
 
-# example architecture decision test
+
 user_data["users"] = 10000
 user_data["realtime"] = True
 user_data["payments"] = True

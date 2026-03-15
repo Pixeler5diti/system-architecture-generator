@@ -55,7 +55,7 @@ def chat_with_llm(messages):
 
     result = response.json()
 
-    print(result)   # <-- important debug line
+    print(result)  
 
     if "choices" not in result:
         return f"API Error: {result}"

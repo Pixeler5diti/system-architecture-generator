@@ -6,7 +6,7 @@ def architecture_decision(data):
 
     architecture = {}
 
-    # architecture style
+   #arch style
     if users < 1000:
         architecture["style"] = "Monolith"
     elif users < 10000:
