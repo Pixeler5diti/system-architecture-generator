@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Architecture Advisor</title>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad:true });
+</script>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:#0b0f17;
+color:#e5e7eb;
+margin:0;
+display:flex;
+justify-content:center;
+}
+
+.container{
+width:900px;
+padding:40px 20px;
+}
+
+h1{
+font-weight:600;
+font-size:26px;
+text-align:center;
+margin-bottom:30px;
+color:#f3f4f6;
+}
+
+.chat-box{
+background:#111827;
+border-radius:14px;
+padding:24px;
+height:520px; /* bigger */
+overflow-y:auto;
+border:1px solid #1f2937;
+margin-bottom:20px;
+}
+
+.message{
+margin-bottom:20px;
+display:flex;
+flex-direction:column;
+}
+
+.message span{
+font-size:12px;
+opacity:0.6;
+margin-bottom:6px;
+}
+
+.bubble{
+padding:14px 16px;
+border-radius:10px;
+line-height:1.6;
+font-size:15px;
+white-space:pre-wrap;
+}
+
+.user-bubble{
+background:#1f2937;
+align-self:flex-end;
+max-width:75%;
+}
+
+.assistant-bubble{
+background:#111827;
+border:1px solid #1f2937;
+max-width:85%;
+}
+
+/* better headings */
+
+.bubble strong{
+display:block;
+font-size:15px;
+font-weight:600;
+margin-top:12px;
+margin-bottom:6px;
+padding-bottom:6px;
+border-bottom:1px solid #374151;
+}
+
+/* horizontal separators */
+
+.bubble hr{
+border:none;
+border-top:1px solid #374151;
+margin:12px 0;
+}
+
+form{
+display:flex;
+gap:10px;
+}
+
+input{
+flex:1;
+padding:14px;
+background:#111827;
+border:1px solid #1f2937;
+border-radius:8px;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+input:focus{
+border-color:#374151;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:14px 20px;
+border-radius:8px;
+font-size:15px;
+cursor:pointer;
+transition:background 0.2s ease;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.diagram-container{
+margin-top:30px;
+background:white;
+border-radius:12px;
+padding:28px;
+color:black;
+}
+
+.diagram-container h2{
+margin-top:0;
+font-size:18px;
+margin-bottom:20px;
+}
+
+.mermaid{
+display:flex;
+justify-content:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Architecture Advisor</h1>
+
+<div class="chat-box" id="chatBox">
+
+{% if history %}
+{% for msg in history %}
+
+<div class="message">
+
+{% if msg.role == "user" %}
+<span>You</span>
+<div class="bubble user-bubble">
+{{msg.content}}
+</div>
+
+{% else %}
+<span>Assistant</span>
+<div class="bubble assistant-bubble">
+{{msg.content | replace("**","") | replace("***","") }}
+</div>
+{% endif %}
+
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+<form action="/chat" method="post">
+
+<input
+name="message"
+placeholder="Describe your system idea..."
+required
+>
+
+<button type="submit">Send</button>
+
+</form>
+
+{% if diagram %}
+
+<div class="diagram-container">
+
+<h2>Architecture Diagram</h2>
+
+<div class="mermaid">
+{{diagram}}
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<script>
+const chat = document.getElementById("chatBox");
+chat.scrollTop = chat.scrollHeight;
+</script>
+
+</body>
+</html>
