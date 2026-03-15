@@ -1,10 +1,15 @@
 # Architecture Advisor
 
-Architecture Advisor is an AI-assisted tool that helps developers design system architectures for software products. A user describes their application idea (for example, a food delivery platform, chat application, or SaaS product), and the system generates a recommended architecture along with an explanation and a visual diagram.
+Architecture Advisor is an AI-assisted tool that helps developers design system architectures for software products. A user describes their application idea and the system generates a recommended architecture along with an explanation and a visual diagram.
 
 The project combines rule-based architecture decisions with large language model reasoning to produce structured architecture guidance and diagrams.
 
 ---
+# system design genreation 
+![alt text](./templates/assets/1.png)
+
+# visula diagram for faster understanding along with mermaid diagram
+![alt text](./templates/assets/2.png)
 
 ## Overview
 
